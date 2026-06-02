@@ -14,7 +14,271 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      expenses: {
+        Row: {
+          amount_pkr: number
+          created_at: string
+          created_by: string | null
+          entry_date: string
+          id: string
+          note: string | null
+          owner_id: string
+          season_id: string
+        }
+        Insert: {
+          amount_pkr: number
+          created_at?: string
+          created_by?: string | null
+          entry_date: string
+          id?: string
+          note?: string | null
+          owner_id: string
+          season_id: string
+        }
+        Update: {
+          amount_pkr?: number
+          created_at?: string
+          created_by?: string | null
+          entry_date?: string
+          id?: string
+          note?: string | null
+          owner_id?: string
+          season_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "expenses_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "owners"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "expenses_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      farmers: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          note: string | null
+          phone: string | null
+          village: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          note?: string | null
+          phone?: string | null
+          village?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          note?: string | null
+          phone?: string | null
+          village?: string | null
+        }
+        Relationships: []
+      }
+      incomes: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          entry_date: string
+          farmer_id: string
+          id: string
+          note: string | null
+          rate_per_acre: number
+          received_amount: number
+          season_id: string
+          total_acre: number
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          entry_date: string
+          farmer_id: string
+          id?: string
+          note?: string | null
+          rate_per_acre: number
+          received_amount?: number
+          season_id: string
+          total_acre: number
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          entry_date?: string
+          farmer_id?: string
+          id?: string
+          note?: string | null
+          rate_per_acre?: number
+          received_amount?: number
+          season_id?: string
+          total_acre?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "incomes_farmer_id_fkey"
+            columns: ["farmer_id"]
+            isOneToOne: false
+            referencedRelation: "farmers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "incomes_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      owner_transfers: {
+        Row: {
+          amount_pkr: number
+          created_at: string
+          created_by: string | null
+          entry_date: string
+          from_owner_id: string
+          id: string
+          note: string | null
+          season_id: string
+          to_owner_id: string
+        }
+        Insert: {
+          amount_pkr: number
+          created_at?: string
+          created_by?: string | null
+          entry_date: string
+          from_owner_id: string
+          id?: string
+          note?: string | null
+          season_id: string
+          to_owner_id: string
+        }
+        Update: {
+          amount_pkr?: number
+          created_at?: string
+          created_by?: string | null
+          entry_date?: string
+          from_owner_id?: string
+          id?: string
+          note?: string | null
+          season_id?: string
+          to_owner_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "owner_transfers_from_owner_id_fkey"
+            columns: ["from_owner_id"]
+            isOneToOne: false
+            referencedRelation: "owners"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "owner_transfers_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "owner_transfers_to_owner_id_fkey"
+            columns: ["to_owner_id"]
+            isOneToOne: false
+            referencedRelation: "owners"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      owners: {
+        Row: {
+          address: string | null
+          cnic: string | null
+          created_at: string
+          id: string
+          name: string
+          note: string | null
+          phone: string | null
+        }
+        Insert: {
+          address?: string | null
+          cnic?: string | null
+          created_at?: string
+          id?: string
+          name: string
+          note?: string | null
+          phone?: string | null
+        }
+        Update: {
+          address?: string | null
+          cnic?: string | null
+          created_at?: string
+          id?: string
+          name?: string
+          note?: string | null
+          phone?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          email: string | null
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
+      seasons: {
+        Row: {
+          created_at: string
+          end_date: string
+          id: string
+          is_active: boolean
+          name: string
+          start_date: string
+        }
+        Insert: {
+          created_at?: string
+          end_date: string
+          id?: string
+          is_active?: boolean
+          name: string
+          start_date: string
+        }
+        Update: {
+          created_at?: string
+          end_date?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          start_date?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
