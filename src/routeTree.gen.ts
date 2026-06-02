@@ -12,6 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppSettingsRouteImport } from './routes/_app/settings'
+import { Route as AppSeasonsRouteImport } from './routes/_app/seasons'
+import { Route as AppOwnersRouteImport } from './routes/_app/owners'
+import { Route as AppIncomeRouteImport } from './routes/_app/income'
+import { Route as AppFarmersRouteImport } from './routes/_app/farmers'
 import { Route as AppExpensesRouteImport } from './routes/_app/expenses'
 import { Route as AppDashboardRouteImport } from './routes/_app/dashboard'
 
@@ -29,6 +34,31 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSeasonsRoute = AppSeasonsRouteImport.update({
+  id: '/seasons',
+  path: '/seasons',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppOwnersRoute = AppOwnersRouteImport.update({
+  id: '/owners',
+  path: '/owners',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppIncomeRoute = AppIncomeRouteImport.update({
+  id: '/income',
+  path: '/income',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppFarmersRoute = AppFarmersRouteImport.update({
+  id: '/farmers',
+  path: '/farmers',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppExpensesRoute = AppExpensesRouteImport.update({
   id: '/expenses',
   path: '/expenses',
@@ -45,12 +75,22 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/dashboard': typeof AppDashboardRoute
   '/expenses': typeof AppExpensesRoute
+  '/farmers': typeof AppFarmersRoute
+  '/income': typeof AppIncomeRoute
+  '/owners': typeof AppOwnersRoute
+  '/seasons': typeof AppSeasonsRoute
+  '/settings': typeof AppSettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/dashboard': typeof AppDashboardRoute
   '/expenses': typeof AppExpensesRoute
+  '/farmers': typeof AppFarmersRoute
+  '/income': typeof AppIncomeRoute
+  '/owners': typeof AppOwnersRoute
+  '/seasons': typeof AppSeasonsRoute
+  '/settings': typeof AppSettingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -59,12 +99,35 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/expenses': typeof AppExpensesRoute
+  '/_app/farmers': typeof AppFarmersRoute
+  '/_app/income': typeof AppIncomeRoute
+  '/_app/owners': typeof AppOwnersRoute
+  '/_app/seasons': typeof AppSeasonsRoute
+  '/_app/settings': typeof AppSettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/dashboard' | '/expenses'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/dashboard'
+    | '/expenses'
+    | '/farmers'
+    | '/income'
+    | '/owners'
+    | '/seasons'
+    | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/dashboard' | '/expenses'
+  to:
+    | '/'
+    | '/login'
+    | '/dashboard'
+    | '/expenses'
+    | '/farmers'
+    | '/income'
+    | '/owners'
+    | '/seasons'
+    | '/settings'
   id:
     | '__root__'
     | '/'
@@ -72,6 +135,11 @@ export interface FileRouteTypes {
     | '/login'
     | '/_app/dashboard'
     | '/_app/expenses'
+    | '/_app/farmers'
+    | '/_app/income'
+    | '/_app/owners'
+    | '/_app/seasons'
+    | '/_app/settings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -103,6 +171,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/settings': {
+      id: '/_app/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/seasons': {
+      id: '/_app/seasons'
+      path: '/seasons'
+      fullPath: '/seasons'
+      preLoaderRoute: typeof AppSeasonsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/owners': {
+      id: '/_app/owners'
+      path: '/owners'
+      fullPath: '/owners'
+      preLoaderRoute: typeof AppOwnersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/income': {
+      id: '/_app/income'
+      path: '/income'
+      fullPath: '/income'
+      preLoaderRoute: typeof AppIncomeRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/farmers': {
+      id: '/_app/farmers'
+      path: '/farmers'
+      fullPath: '/farmers'
+      preLoaderRoute: typeof AppFarmersRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/expenses': {
       id: '/_app/expenses'
       path: '/expenses'
@@ -123,11 +226,21 @@ declare module '@tanstack/react-router' {
 interface AppRouteChildren {
   AppDashboardRoute: typeof AppDashboardRoute
   AppExpensesRoute: typeof AppExpensesRoute
+  AppFarmersRoute: typeof AppFarmersRoute
+  AppIncomeRoute: typeof AppIncomeRoute
+  AppOwnersRoute: typeof AppOwnersRoute
+  AppSeasonsRoute: typeof AppSeasonsRoute
+  AppSettingsRoute: typeof AppSettingsRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppDashboardRoute: AppDashboardRoute,
   AppExpensesRoute: AppExpensesRoute,
+  AppFarmersRoute: AppFarmersRoute,
+  AppIncomeRoute: AppIncomeRoute,
+  AppOwnersRoute: AppOwnersRoute,
+  AppSeasonsRoute: AppSeasonsRoute,
+  AppSettingsRoute: AppSettingsRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
