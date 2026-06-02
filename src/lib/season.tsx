@@ -29,7 +29,8 @@ export function SeasonProvider({ children }: { children: ReactNode }) {
     if (!data || data.length === 0) return;
     const stored = typeof window !== "undefined" ? localStorage.getItem("currentSeasonId") : null;
     const found = stored && data.find((s) => s.id === stored);
-    setCurrentIdState((found ?? data.find((s) => s.is_active) ?? data[0]).id);
+    const pick = (found || data.find((s) => s.is_active) || data[0]);
+    setCurrentIdState(pick.id);
   }, [data]);
 
   const setCurrentId = (id: string) => {
